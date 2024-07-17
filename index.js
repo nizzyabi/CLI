@@ -6,15 +6,18 @@ import * as p from '@clack/prompts';
 import { setTimeout } from 'timers/promises';
 import color from 'picocolors';
 
+// Display art
 const displayArt = `
-███╗   ██╗██╗███████╗███████╗██╗   ██╗
-████╗  ██║██║╚══███╔╝╚══███╔╝╚██╗ ██╔╝
-██╔██╗ ██║██║  ███╔╝   ███╔╝  ╚████╔╝ 
-██║╚██╗██║██║ ███╔╝   ███╔╝    ╚██╔╝  
-██║ ╚████║██║███████╗███████╗   ██║   
-╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝   ╚═╝                                       
+████████╗██╗  ██╗███████╗    ███╗   ██╗██╗███████╗███████╗██╗   ██╗     ██████╗  █████╗ ███╗   ███╗███████╗███████╗
+╚══██╔══╝██║  ██║██╔════╝    ████╗  ██║██║╚══███╔╝╚══███╔╝╚██╗ ██╔╝    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔════╝
+   ██║   ███████║█████╗      ██╔██╗ ██║██║  ███╔╝   ███╔╝  ╚████╔╝     ██║  ███╗███████║██╔████╔██║█████╗  ███████╗
+   ██║   ██╔══██║██╔══╝      ██║╚██╗██║██║ ███╔╝   ███╔╝    ╚██╔╝      ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ╚════██║
+   ██║   ██║  ██║███████╗    ██║ ╚████║██║███████╗███████╗   ██║       ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗███████║
+   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝   ╚═╝        ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝
+                                                                                                                                                          
 `
 
+// Variables
 let correctTotal = 0;
 
 async function askQuestion(question, answers, correctAnswerIndex) {
@@ -39,8 +42,7 @@ async function askQuestion(question, answers, correctAnswerIndex) {
     }
 }
 
-// Question class
-
+// Question class 
 class Question {
     constructor(question, answersArray, correctAnswerIndex) {
         this.question = question;
@@ -57,41 +59,43 @@ async function main() {
     await setTimeout(1000);
 
     // Intro text
-    p.intro(`${color.bgRed(color.black('Welcome to the Nizzy Games!!!'))}`);
+    p.intro(`${color.bgRed(color.black(`Welcome to the ${color.bold(`Nizzy Games`)} 🚀🚀🚀`))}`);
 
     // Questions
-
     const question1 = new Question(
-        "1) Is HTML a language?",
+        "💻 Is HTML a language?",
         ["Yes", "No"],
-        0,
+        1,
     );
 
     const question2 = new Question(
-        "2) When was JavaScript Created?",
+        "📅 When was JavaScript Created?",
         ["1940", "2003", "1995", "2010"],
         2,
     );
 
     const question3 = new Question(
-        "3) What is the most popular programming language?",
+        "🤝 What is the most popular programming language?",
         ["Python", "JavaScript", "Java", "C"],
         1,
     );
 
     const question4 = new Question(
-        "4) How many programmers are there in the world?",
+        "🌎 How many programmers are there in the world?",
         ["20 million", "17 million", "12 million", "26 million"],
         3,
     );
 
     const question5 = new Question(
-        "5) Who is the best coding YouTuber?",
+        "🐐 Who is the best coding YouTuber?",
         ["FireShip", "Traversy Media", "Web Dev Simplified", "CodeStackr"],
         0,
     );
 
     const allQuestions = [question1, question2, question3, question4, question5];
+
+
+
 
     // Ask if the player is ready
     const readyToPlay = await p.select({
@@ -109,25 +113,26 @@ async function main() {
         }
 
         // Decide what ending screen to show based on how many questions user answered correctly
-        p.outro(`${color.bgMagenta(color.black(`You got ${correctTotal} questions correct!`))}`);
+        p.outro(`${color.bgRed(color.black(`You got ${color.bold(correctTotal)} questions correct!`))}`);
 
         if (correctTotal === 5) {
             const s = p.spinner();
-            s.start("Generating secret message");
+            s.start("Generating gift card code...");
             await setTimeout(5000);
             s.stop();
-            p.outro(`${color.bgRed(color.black(`The command line is a tool that is ripe for change.`))}`);
+            p.outro(`${color.bgWhite(color.black(`Code: ${color.bold("")}`))}`);
         } else {
             const s = p.spinner();
             s.start();
             await setTimeout(3000);
             s.stop();
-            p.outro(`${color.bgRed(color.black(`You need 5/5 correct to unlock the secret message. Try again.`))}`);
+            p.outro(`${color.bgRed(color.black(`You need 5 correct answers to get the code 🤫`))}`);
         }
     } else {
         // Outro text
-        p.outro(`${color.bgRed(color.black('Thank you for playing the Nizzy Games :)'))}`);
+        p.outro(`${color.bgCyan(color.black('Thank you for playing the Nizzy Games 🚀🚀🚀'))}`);
     }
 }
 
+// catch errors
 main().catch(console.error);
