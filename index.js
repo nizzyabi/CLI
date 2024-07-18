@@ -6,6 +6,11 @@ import * as p from '@clack/prompts';
 import { setTimeout } from 'timers/promises';
 import color from 'picocolors';
 
+
+// bin ./index.js
+// npm login 
+// npm publish
+
 // Display art
 const displayArt = `
 ████████╗██╗  ██╗███████╗    ███╗   ██╗██╗███████╗███████╗██╗   ██╗     ██████╗  █████╗ ███╗   ███╗███████╗███████╗
